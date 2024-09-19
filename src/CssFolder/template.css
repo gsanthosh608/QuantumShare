@@ -1,0 +1,108 @@
+.home-container {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    background-color: white;
+  }
+  
+  .template-section {
+    height: 85%; /* Increase the height to give more space to the content */
+    width: 38%;
+    position: absolute;
+    background-color: #1A1A2E;
+  }
+  
+  #custom-template-wrapper {
+    height: 100%; /* Allow the custom-template-wrapper to take full height */
+    border-radius: 10px;
+    color: #E94560;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* This will help balance the layout */
+  }
+  
+  
+  .editing-section {
+    padding-left: 20px;
+  }
+  
+  
+  .logo-container {
+    position: absolute;
+    width: 75px;
+    height: 75px;
+    
+    
+  }
+  
+  .logo-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  
+  .title-section {
+    text-align: center;
+    margin-top: 150px;
+    display: block;
+    overflow-wrap: break-word;
+  }
+  
+  .title {
+    font-size: 24px;
+    font-family: Arial, sans-serif;
+    color: #E94560;
+    
+  }
+  
+  .content-section {
+    margin-top: 50px;
+    width: 100%;
+    max-width: 100%;
+    flex-grow: 1;
+    display: block; /* Change from flex to block to allow text wrapping */
+    text-align: center;
+    overflow-wrap: break-word; /* This ensures text will wrap when necessary */
+    word-break: break-word; /* This ensures long words also break to the next line */
+    overflow: auto; /* Allow scrolling if content exceeds the available space */
+    box-sizing: border-box;
+    height: 100%;
+    padding: 10px;
+  }
+  
+  
+  
+  .content-text {
+    color: #E5E5E5;
+    font-size: 1rem; 
+    text-align: center;
+    overflow-wrap: break-word;
+  }
+  
+  .footer-section {
+    margin-top: 20px;
+    text-align: center;
+    overflow: hidden;
+  }
+  
+  .footer-text {
+    color: #E94560;
+    font-size: 16px;
+  }
+  
+  @media (max-width: 768px) {
+    .home-container {
+      flex-direction: column;
+    }
+  
+    .template-section, .editing-section {
+      width: 100%;
+      padding: 0;
+    }
+  
+    #custom-template-wrapper {
+      margin-bottom: 20px;
+    }
+  }
+  
