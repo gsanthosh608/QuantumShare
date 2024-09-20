@@ -12,12 +12,9 @@ function EditContainer({
   updateFooterColor,
   logoUrl,
   updateLogoUrl,
-  updateLogo,
-  updateLogoColor,
   updateLogoSize,
   updateBgColor,
   updateBackgroundImage,
-  
 }) {
   const [titleInput, setTitleInput] = useState('');
   const [titleColor, setTitleColor] = useState('#ffffff');
@@ -91,36 +88,39 @@ function EditContainer({
   const handleLogoTitleChange = (event) => {
     const newTitle = event.target.value;
     setLogoTitleInput(newTitle);
-    updateLogo(newTitle);
   };
 
   const handleLogoColorChange = (event) => {
     const newTitleColor = event.target.value;
     setLogoColor(newTitleColor);
-    updateLogoColor(newTitleColor);
   };
 
   const handleLogoSizeChange = (event) => {
     const newSize = event.target.value;
     setLogoSize(newSize);
-    updateLogoSize(newSize);
   };
-
 
   const handleBgColorChange = (event) => {
     const newBgColor = event.target.value;
     setBgColor(newBgColor);
-    updateBgColor(newBgColor);
   };
 
-  function saveChangies(e) {
+  const handleSaveChanges = (e) => {
     e.preventDefault();
-
-  }
+    // Logic for saving changes if needed
+    updateTitle(titleInput);
+    updateTitleColor(titleColor);
+    updateContent(contentInput);
+    updateContentColor(contentColor);
+    updateFooter(footerInput);
+    updateFooterColor(footerColor);
+    updateLogoUrl(logoTitleInput); // Assuming this is how logo URL is updated
+    updateLogoSize(logoSize);
+    updateBgColor(bgColor);
+  };
 
   return (
     <div style={{ height: '100%', width: '100%' }}>
-      
       <label>
         Upload BackgroundImage:
         <input
@@ -167,7 +167,6 @@ function EditContainer({
           style={{ width: '100%', marginBottom: '16px' }}
         />
       </label>
-
 
       <label>
         Title:
@@ -235,8 +234,8 @@ function EditContainer({
         />
       </label>
 
-      <Button type="submit" onClick={saveChangies} variant="outlined" color="error">
-        Updated
+      <Button type="submit" onClick={handleSaveChanges} variant="outlined" color="error">
+        Update
       </Button>
     </div>
   );
