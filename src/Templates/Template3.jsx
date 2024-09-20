@@ -4,7 +4,7 @@ import Draggable from 'react-draggable';
 import { FaPlusCircle, FaDownload, FaTimes, FaPhoneAlt, FaEnvelope, FaUserPlus } from 'react-icons/fa';
 import html2canvas from 'html2canvas';
 
-const Template3 = () => {
+const App = () => {
   const [companyName, setCompanyName] = useState("Quantum Paradigm");
   const [tagline, setTagline] = useState("Delivering cutting-edge solutions for a smarter, more connected world.");
   const [footerText, setFooterText] = useState("");
@@ -441,4 +441,4 @@ const Template3 = () => {
   );
 };
 
-export default Template3;
+export default App;
