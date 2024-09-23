@@ -58,12 +58,13 @@ export default function Gallery() {
       case 'template3':
         return <Template3 data={templateData} setData={handleTemplateChange} editable={editable} ref={templateRef} />;
       case 'template4':
-        // return <Template4 data={templateData} setData={handleTemplateChange} editable={editable} ref={templateRef} />;
+        // Add logic for template4 if needed
         return null;
       default:
         return null;
     }
   };
+  
 
   return (
     <div>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Logo from '../Assets/Quantum_Logo.webp';
 import '../CssFolder/template.css';
 import EditContainer from './EditContainer';
+import Draggable from 'react-draggable';
 
 const Template = ({ data, setData, editable }) => {
   const {
@@ -40,11 +41,13 @@ const Template = ({ data, setData, editable }) => {
               {title || 'Welcome to Our Platform'}
             </h1>
           </div>
+          <Draggable>
           <div className="content-section">
             <p className="content-text" style={{ color: contentColor || '#E5E5E5' }}>
               {content || 'Engage with your audience, grow your brand, and analyze performance with our comprehensive social media tools.'}
             </p>
           </div>
+          </Draggable>
           <div className="footer-section">
             <p className="footer-text" style={{ color: footerColor || '#E94560' }}>
               {footer || '© 2024 Your Company Name. All rights reserved.'}
