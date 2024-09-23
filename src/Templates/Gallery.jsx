@@ -21,7 +21,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 export default function Gallery() {
   const [open, setOpen] = useState(false); // Manage the main dialog
-  const [previewOpen, setPreviewOpen] = useState(false); // Manage the preview popup
+  // const [previewOpen, setPreviewOpen] = useState(false); 
   const [selectedTemplate, setSelectedTemplate] = useState(null);
   const [templateData, setTemplateData] = useState({}); // State to track changes to template data
 
@@ -37,13 +37,13 @@ export default function Gallery() {
     setSelectedTemplate(null); // Reset the selected template
   };
 
-  const handlePreviewOpen = () => {
-    setPreviewOpen(true); // Open the preview popup
-  };
+  // const handlePreviewOpen = () => {
+  //   setPreviewOpen(true); // Open the preview popup
+  // };
 
-  const handlePreviewClose = () => {
-    setPreviewOpen(false); // Close the preview popup
-  };
+  // const handlePreviewClose = () => {
+  //   setPreviewOpen(false); // Close the preview popup
+  // };
 
   const handleTemplateChange = (updatedData) => {
     setTemplateData(updatedData); // Update the template data
@@ -64,7 +64,7 @@ export default function Gallery() {
         return null;
     }
   };
-  
+
 
   return (
     <div>
@@ -99,7 +99,7 @@ export default function Gallery() {
         </div>
       </div>
 
-      {/* Main dialog to display template and edit */}
+      
       <Dialog
         open={open}
         onClose={handleClose}
@@ -134,81 +134,10 @@ export default function Gallery() {
           </button>
         </div>
 
-        {/* Render the selected template */}
+        
         <div style={{ flex: 1, overflowY: 'auto', padding: '20px' }}>
           <div ref={templateRef}>
             {renderTemplate(true)} {/* Pass editable=true to allow editing */}
-          </div>
-        </div>
-
-        {/* Preview Button */}
-        <div style={{
-          position: 'absolute',
-          bottom: '12px',
-          right: '10px',
-          display: 'flex',
-          justifyContent: 'center',
-          backgroundColor: '#fff',
-          padding: '5px',
-          height: '40px',
-        }}>
-          <Button
-            onClick={handlePreviewOpen}
-            style={{
-              padding: '10px 20px',
-              backgroundColor: '#4CAF50',
-              color: '#fff',
-              border: 'none',
-              borderRadius: '5px',
-              cursor: 'pointer',
-              marginLeft: '15px',
-            }}
-          >
-            Preview
-          </Button>
-        </div>
-      </Dialog>
-
-      {/* Preview Dialog */}
-      <Dialog
-        open={previewOpen}
-        onClose={handlePreviewClose}
-        TransitionComponent={Transition}
-        fullWidth
-        maxWidth="lg"
-        PaperProps={{
-          style: {
-            width: '35%',
-            maxHeight: '90vh',
-            height: '90%',
-            borderRadius: '20px',
-            display: 'flex',
-            flexDirection: 'column',
-            position: 'relative',
-          },
-        }}
-      >
-        {/* Close Button for Preview */}
-        <div style={{ display: 'flex', justifyContent: 'flex-end', padding: '10px' }}>
-          <button
-            onClick={handlePreviewClose}
-            style={{
-              padding: '10px 20px',
-              backgroundColor: '#E94560',
-              color: '#fff',
-              border: 'none',
-              borderRadius: '5px',
-              cursor: 'pointer',
-            }}
-          >
-            Close Preview
-          </button>
-        </div>
-
-        {/* Render the live edited template */}
-        <div style={{ flex: 1, overflowY: 'auto', padding: '20px' }}>
-          <div ref={templateRef}>
-            {renderTemplate(false)} {/* Pass editable=false to show preview without editing */}
           </div>
         </div>
       </Dialog>

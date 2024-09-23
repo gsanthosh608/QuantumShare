@@ -1,27 +1,27 @@
 import React, { useState, useRef } from 'react';
-import '../CssFolder/template3.css';
+import '../CssFolder/template4.css';
 import Draggable from 'react-draggable';
 import { FaPlusCircle, FaDownload, FaTimes, FaPhoneAlt, FaEnvelope, FaUserPlus } from 'react-icons/fa';
 import html2canvas from 'html2canvas';
 
-const App = () => {
+const Template4 = () => {
   const [companyName, setCompanyName] = useState("Quantum Paradigm");
   const [tagline, setTagline] = useState("Delivering cutting-edge solutions for a smarter, more connected world.");
   const [footerText, setFooterText] = useState("");
 
-  const [logo, setLogo] = useState("abcd.jpg");
-  const [teamPhoto, setTeamPhoto] = useState("t.jpg");
+  const [logo, setLogo] = useState("logos.png");
+  const [teamPhoto, setTeamPhoto] = useState("p.jpg");
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [currentEditingElement, setCurrentEditingElement] = useState(null);
 
-  const [companyNameFontSize, setCompanyNameFontSize] = useState("34px");
+  const [companyNameFontSize, setCompanyNameFontSize] = useState("71px");
   const [companyNameFontStyle, setCompanyNameFontStyle] = useState("italic");
   const [companyNameColor, setCompanyNameColor] = useState("#000000");
 
-  const [taglineFontSize, setTaglineFontSize] = useState("27px");
+  const [taglineFontSize, setTaglineFontSize] = useState("31px");
   const [taglineFontStyle, setTaglineFontStyle] = useState("normal");
-  const [taglineColor, setTaglineColor] = useState("#F7F9F2");
+  const [taglineColor, setTaglineColor] = useState("#B80000");
 
   const [footerFontSize, setFooterFontSize] = useState("25px");
   const [footerFontStyle, setFooterFontStyle] = useState("normal");
@@ -33,8 +33,8 @@ const App = () => {
   const [isEditingPhone, setIsEditingPhone] = useState(false);
   const [isEditingEmail, setIsEditingEmail] = useState(false);
 
-  const [logoDimensions, setLogoDimensions] = useState({ width: 170, height: 79});
-  const [teamPhotoDimensions, setTeamPhotoDimensions] = useState({ width:450 , height: 600 });
+  const [logoDimensions, setLogoDimensions] = useState({ width: 235, height: 98});
+  const [teamPhotoDimensions, setTeamPhotoDimensions] = useState({ width: 294, height: 300 });
 
   const handleLogoChange = (e) => {
     if (e.target.files && e.target.files[0]) {
@@ -318,7 +318,26 @@ const App = () => {
           </div>
         </Draggable>
 
-        
+        {/* Draggable Tagline (Editable Text) */}
+        <Draggable>
+          <div className="draggable-element">
+            <p
+              className="tagline"
+              contentEditable="true"
+              suppressContentEditableWarning={true}
+              onBlur={(e) => setTagline(e.target.innerText)}
+              onClick={() => openPopup('tagline')}
+              style={{
+                cursor: 'pointer',
+                fontSize: taglineFontSize,
+                fontStyle: taglineFontStyle,
+                color: taglineColor,
+              }}
+            >
+              {tagline}
+            </p>
+          </div>
+        </Draggable>
 
         {/* Draggable Team Photo */}
         <Draggable>
@@ -349,76 +368,48 @@ const App = () => {
           </div>
         </Draggable>
 
-         {/* Draggable Tagline (Editable Text) */}
+        {/* Draggable Footer (Editable Text) */}
+         {/* Draggable Footer (Editable Text) */}
          <Draggable>
-          <div className="draggable-element">
-            <p
-              className="tagline"
-              contentEditable="true"
-              suppressContentEditableWarning={true}
-              onBlur={(e) => setTagline(e.target.innerText)}
-              onClick={() => openPopup('tagline')}
-              style={{
-                cursor: 'pointer',
-                fontSize: taglineFontSize,
-                fontStyle: taglineFontStyle,
-                color: taglineColor,
-              }}
-            >
-              {tagline}
+          <div
+            className="draggable-footer"
+            style={{ fontSize: footerFontSize, fontStyle: footerFontStyle, color: footerColor }}
+          >
+            <p>
+              {footerText}
+              {isEditingPhone ? (
+                <input
+                  type="text"
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
+                  onBlur={() => setIsEditingPhone(false)}
+                />
+              ) : (
+                <span onClick={() => setIsEditingPhone(true)}>
+                  <FaPhoneAlt /> {phoneNumber}
+                </span>
+              )}
+              <br></br>
+              <br></br>
+              {isEditingEmail ? (
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  onBlur={() => setIsEditingEmail(false)}
+                />
+              ) : (
+                <span onClick={() => setIsEditingEmail(true)}>
+                  <FaEnvelope /> {email}
+                </span>
+              )}
             </p>
-          </div>
-        </Draggable>
-
-        {/* Draggable Footer Elements */}
-        <Draggable>
-          <div
-            className="draggable-element"
-            style={{ fontSize: footerFontSize, fontStyle: footerFontStyle, color: footerColor }}
-          >
-            {isEditingPhone ? (
-              <input
-                type="text"
-                value={phoneNumber}
-                onChange={(e) => setPhoneNumber(e.target.value)}
-                onBlur={() => setIsEditingPhone(false)}
-              />
-            ) : (
-              <span onClick={() => setIsEditingPhone(true)} style={{ cursor: 'pointer' }}>
-                <FaPhoneAlt /> {phoneNumber}
-              </span>
-            )}
-          </div>
-        </Draggable>
-
-        <Draggable>
-          <div
-            className="draggable-element"
-            style={{ fontSize: footerFontSize, fontStyle: footerFontStyle, color: footerColor }}
-          >
-            {isEditingEmail ? (
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                onBlur={() => setIsEditingEmail(false)}
-              />
-            ) : (
-              <span onClick={() => setIsEditingEmail(true)} style={{ cursor: 'pointer' }}>
-                <FaEnvelope /> {email}
-              </span>
-            )}
-          </div>
-        </Draggable>
-
-        <Draggable>
-          <div className="draggable-element">
             <button className="join-us-button">
               <FaUserPlus /> Join Us
             </button>
           </div>
         </Draggable>
-      </div>
+        </div>
 
       {/* Download Button */}
       <button className="download-btn" onClick={handleDownload}>
@@ -441,4 +432,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Template4;

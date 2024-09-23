@@ -6,7 +6,7 @@
     justify-content: flex-start; /* Align items at the top */
     height: 95vh;
     padding: 10px; /* Added padding for better spacing */
-    background-color: #15c5d1; /* Light blue background for a modern look */
+    background-color: #e6ecec; /* Light blue background for a modern look */
   }
   
   .header-box {
@@ -71,7 +71,7 @@
   }
   
   .template {
-    background-image: url("/public/f.jpg");/* White background for the template */
+    background-image: url("../Assets/bground1.webp");/* White background for the template */
     padding: 20px;
     border-radius: 12px; /* More rounded corners */
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Deeper shadow for a card-like effect */
