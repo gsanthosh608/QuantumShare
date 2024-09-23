@@ -1,40 +1,30 @@
-import React, { useState, useRef } from 'react';
-import './Template4.css';
+import React, { useState } from 'react';
 import Draggable from 'react-draggable';
-import { FaPlusCircle, FaDownload, FaTimes, FaPhoneAlt, FaEnvelope, FaUserPlus } from 'react-icons/fa';
+import { FaPlusCircle, FaDownload, FaTimes } from 'react-icons/fa';
 import html2canvas from 'html2canvas';
 
-const App = () => {
+const Template4 = () => {
   const [companyName, setCompanyName] = useState("Quantum Paradigm");
   const [tagline, setTagline] = useState("Delivering cutting-edge solutions for a smarter, more connected world.");
-  const [footerText, setFooterText] = useState("");
+  const [footerText, setFooterText] = useState("© Quantum Paradigm | Empowering Innovation");
 
-  const [logo, setLogo] = useState("logos.png");
-  const [teamPhoto, setTeamPhoto] = useState("p.jpg");
+  const [logo, setLogo] = useState("T7l.jpg");
+  const [teamPhoto, setTeamPhoto] = useState("T7b.jpg");
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [currentEditingElement, setCurrentEditingElement] = useState(null);
 
-  const [companyNameFontSize, setCompanyNameFontSize] = useState("71px");
-  const [companyNameFontStyle, setCompanyNameFontStyle] = useState("italic");
+  const [companyNameFontSize, setCompanyNameFontSize] = useState("24px");
+  const [companyNameFontStyle, setCompanyNameFontStyle] = useState("normal");
   const [companyNameColor, setCompanyNameColor] = useState("#000000");
 
-  const [taglineFontSize, setTaglineFontSize] = useState("31px");
+  const [taglineFontSize, setTaglineFontSize] = useState("16px");
   const [taglineFontStyle, setTaglineFontStyle] = useState("normal");
-  const [taglineColor, setTaglineColor] = useState("#B80000");
+  const [taglineColor, setTaglineColor] = useState("#000000");
 
-  const [footerFontSize, setFooterFontSize] = useState("25px");
+  const [footerFontSize, setFooterFontSize] = useState("14px");
   const [footerFontStyle, setFooterFontStyle] = useState("normal");
   const [footerColor, setFooterColor] = useState("#000000");
-
-  const [phoneNumber, setPhoneNumber] = useState("+123456789");
-  const [email, setEmail] = useState("contact@quantumparadigm.com");
-
-  const [isEditingPhone, setIsEditingPhone] = useState(false);
-  const [isEditingEmail, setIsEditingEmail] = useState(false);
-
-  const [logoDimensions, setLogoDimensions] = useState({ width: 235, height: 98});
-  const [teamPhotoDimensions, setTeamPhotoDimensions] = useState({ width: 294, height: 300 });
 
   const handleLogoChange = (e) => {
     if (e.target.files && e.target.files[0]) {
@@ -71,216 +61,50 @@ const App = () => {
     setCurrentEditingElement(null);
   };
 
-  const handleResize = (e, dimension, setter) => {
-    const newValue = parseInt(e.target.value);
-    setter(prev => ({ ...prev, [dimension]: newValue }));
-  };
-
   const renderPopupContent = () => {
-    switch (currentEditingElement) {
-      case 'companyName':
-        return (
-          <div>
-            <h3>Edit Company Name Styles</h3>
-            <div className="control-group">
-              <label>Font Size:</label>
-              <input
-                type="number"
-                min="8"
-                max="72"
-                value={parseInt(companyNameFontSize)}
-                onChange={(e) => setCompanyNameFontSize(`${e.target.value}px`)}
-              />
-            </div>
-            <div className="control-group">
-              <label>Font Style:</label>
-              <select value={companyNameFontStyle} onChange={(e) => setCompanyNameFontStyle(e.target.value)}>
-                <option value="normal">Normal</option>
-                <option value="italic">Italic</option>
-                <option value="oblique">Oblique</option>
-              </select>
-            </div>
-            <div className="control-group">
-              <label>Color:</label>
-              <input
-                type="color"
-                value={companyNameColor}
-                onChange={(e) => setCompanyNameColor(e.target.value)}
-              />
-            </div>
-          </div>
-        );
-      case 'tagline':
-        return (
-          <div>
-            <h3>Edit Tagline Styles</h3>
-            <div className="control-group">
-              <label>Font Size:</label>
-              <input
-                type="number"
-                min="8"
-                max="72"
-                value={parseInt(taglineFontSize)}
-                onChange={(e) => setTaglineFontSize(`${e.target.value}px`)}
-              />
-            </div>
-            <div className="control-group">
-              <label>Font Style:</label>
-              <select value={taglineFontStyle} onChange={(e) => setTaglineFontStyle(e.target.value)}>
-                <option value="normal">Normal</option>
-                <option value="italic">Italic</option>
-                <option value="oblique">Oblique</option>
-              </select>
-            </div>
-            <div className="control-group">
-              <label>Color:</label>
-              <input
-                type="color"
-                value={taglineColor}
-                onChange={(e) => setTaglineColor(e.target.value)}
-              />
-            </div>
-          </div>
-        );
-      case 'footer':
-        return (
-          <div>
-            <h3>Edit Footer Styles</h3>
-            <div className="control-group">
-              <label>Font Size:</label>
-              <input
-                type="number"
-                min="8"
-                max="72"
-                value={parseInt(footerFontSize)}
-                onChange={(e) => setFooterFontSize(`${e.target.value}px`)}
-              />
-            </div>
-            <div className="control-group">
-              <label>Font Style:</label>
-              <select value={footerFontStyle} onChange={(e) => setFooterFontStyle(e.target.value)}>
-                <option value="normal">Normal</option>
-                <option value="italic">Italic</option>
-                <option value="oblique">Oblique</option>
-              </select>
-            </div>
-            <div className="control-group">
-              <label>Color:</label>
-              <input
-                type="color"
-                value={footerColor}
-                onChange={(e) => setFooterColor(e.target.value)}
-              />
-              
-            </div>
-          </div>
-        );
-      case 'logo':
-        return (
-          <div>
-            <h3>Replace Logo</h3>
-            <div className="control-group">
-              <label>Upload New Logo:</label>
-              <input
-                type="file"
-                accept="image/*"
-                onChange={handleLogoChange}
-              />
-            </div>
-            {logo && (
-              <div>
-                <h4>Resize Logo</h4>
-                <div className="resize-controls">
-                  <label>Width:</label>
-                  <input
-                    type="number"
-                    min="50"
-                    max="500"
-                    value={logoDimensions.width}
-                    onChange={(e) => handleResize(e, 'width', setLogoDimensions)}
-                  />
-                  <label>Height:</label>
-                  <input
-                    type="number"
-                    min="50"
-                    max="500"
-                    value={logoDimensions.height}
-                    onChange={(e) => handleResize(e, 'height', setLogoDimensions)}
-                  />
-                </div>
-                <img
-                  src={logo}
-                  alt="Logo Preview"
-                  style={{ width: `${logoDimensions.width}px`, height: `${logoDimensions.height}px`, marginTop: '10px' }}
-                />
-              </div>
-            )}
-          </div>
-        );
-      case 'teamPhoto':
-        return (
-          <div>
-            <h3>Replace Team Photo</h3>
-            <div className="control-group">
-              <label>Upload New Team Photo:</label>
-              <input
-                type="file"
-                accept="image/*"
-                onChange={handleTeamPhotoChange}
-              />
-            </div>
-            {teamPhoto && (
-              <div>
-                <h4>Resize Team Photo</h4>
-                <div className="resize-controls">
-                  <label>Width:</label>
-                  <input
-                    type="number"
-                    min="50"
-                    max="500"
-                    value={teamPhotoDimensions.width}
-                    onChange={(e) => handleResize(e, 'width', setTeamPhotoDimensions)}
-                  />
-                  <label>Height:</label>
-                  <input
-                    type="number"
-                    min="50"
-                    max="500"
-                    value={teamPhotoDimensions.height}
-                    onChange={(e) => handleResize(e, 'height', setTeamPhotoDimensions)}
-                  />
-                </div>
-                <img
-                  src={teamPhoto}
-                  alt="Team Photo Preview"
-                  style={{ width: `${teamPhotoDimensions.width}px`, height: `${teamPhotoDimensions.height}px`, marginTop: '10px' }}
-                />
-              </div>
-            )}
-          </div>
-        );
-      default:
-        return null;
-    }
+    // Add content rendering logic here...
   };
 
   return (
-    <div className="app-container">
-      {/* Draggable template section */}
-      <div className="template">
-        {/* Draggable Logo */}
+    <div style={{
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'flex-start',
+      height: '95vh',
+      padding: '10px',
+      backgroundColor: '#dfe2e2',
+    }}>
+      <div className="template" style={{
+        
+        backgroundColor: '#ffffff',
+        padding: '20px',
+        borderRadius: '12px',
+        boxShadow: '0 8px 16px rgba(0, 0, 0, 0.1)',
+        width: '600px',
+        maxWidth: '90%',
+      }}>
         <Draggable>
-          <div className="draggable-element">
+          <div className="draggable-element" style={{
+            padding: '10px',
+            border: '2px blanchedalmond',
+            borderRadius: '8px',
+            transition: 'border-color 0.3s ease',
+            width: 'fit-content',
+          }}>
             {logo ? (
               <img
                 src={logo}
                 alt="Company Logo"
-                className="company-logo"
+                style={{
+                  cursor: 'pointer',
+                  width: '150px', // Adjust width dynamically if needed
+                  height: '150px', // Adjust height dynamically if needed
+                }}
                 onClick={() => openPopup('logo')}
-                style={{ cursor: 'pointer', width: `${logoDimensions.width}px`, height: `${logoDimensions.height}px` }}
               />
             ) : (
-              <div className="add-logo">
+              <div style={{ cursor: 'pointer' }}>
                 <label htmlFor="logoUpload" style={{ cursor: 'pointer' }}>
                   <FaPlusCircle className="plus-icon" />
                   <p>Add Logo</p>
@@ -297,17 +121,16 @@ const App = () => {
           </div>
         </Draggable>
 
-        {/* Draggable Company Name (Editable Text) */}
         <Draggable>
-          <div className="draggable-element">
+          <div className="draggable-element" style={{
+            cursor: 'pointer',
+          }}>
             <h1
-              className="company-name"
               contentEditable="true"
               suppressContentEditableWarning={true}
               onBlur={(e) => setCompanyName(e.target.innerText)}
               onClick={() => openPopup('companyName')}
               style={{
-                cursor: 'pointer',
                 fontSize: companyNameFontSize,
                 fontStyle: companyNameFontStyle,
                 color: companyNameColor,
@@ -318,17 +141,16 @@ const App = () => {
           </div>
         </Draggable>
 
-        {/* Draggable Tagline (Editable Text) */}
         <Draggable>
-          <div className="draggable-element">
+          <div className="draggable-element" style={{
+            cursor: 'pointer',
+          }}>
             <p
-              className="tagline"
               contentEditable="true"
               suppressContentEditableWarning={true}
               onBlur={(e) => setTagline(e.target.innerText)}
               onClick={() => openPopup('tagline')}
               style={{
-                cursor: 'pointer',
                 fontSize: taglineFontSize,
                 fontStyle: taglineFontStyle,
                 color: taglineColor,
@@ -339,19 +161,23 @@ const App = () => {
           </div>
         </Draggable>
 
-        {/* Draggable Team Photo */}
         <Draggable>
-          <div className="draggable-element">
+          <div className="draggable-element" style={{
+            cursor: 'pointer',
+          }}>
             {teamPhoto ? (
               <img
                 src={teamPhoto}
                 alt="Team"
-                className="team-photo"
+                style={{
+                  cursor: 'pointer',
+                  width: '500px', // Adjust width dynamically if needed
+                  height: '300px', // Adjust height dynamically if needed
+                }}
                 onClick={() => openPopup('teamPhoto')}
-                style={{ cursor: 'pointer', width: `${teamPhotoDimensions.width}px`, height: `${teamPhotoDimensions.height}px` }}
               />
             ) : (
-              <div className="add-team-photo">
+              <div style={{ cursor: 'pointer' }}>
                 <label htmlFor="teamPhotoUpload" style={{ cursor: 'pointer' }}>
                   <FaPlusCircle className="plus-icon" />
                   <p>Add Team Photo</p>
@@ -368,68 +194,60 @@ const App = () => {
           </div>
         </Draggable>
 
-        {/* Draggable Footer (Editable Text) */}
-         {/* Draggable Footer (Editable Text) */}
-         <Draggable>
-          <div
-            className="draggable-footer"
-            style={{ fontSize: footerFontSize, fontStyle: footerFontStyle, color: footerColor }}
-          >
-            <p>
+        <Draggable>
+          <div className="draggable-element" style={{
+            cursor: 'pointer',
+          }}>
+            <footer
+              contentEditable="true"
+              suppressContentEditableWarning={true}
+              onBlur={(e) => setFooterText(e.target.innerText)}
+              onClick={() => openPopup('footer')}
+              style={{
+                fontSize: footerFontSize,
+                fontStyle: footerFontStyle,
+                color: footerColor,
+              }}
+            >
               {footerText}
-              {isEditingPhone ? (
-                <input
-                  type="text"
-                  value={phoneNumber}
-                  onChange={(e) => setPhoneNumber(e.target.value)}
-                  onBlur={() => setIsEditingPhone(false)}
-                />
-              ) : (
-                <span onClick={() => setIsEditingPhone(true)}>
-                  <FaPhoneAlt /> {phoneNumber}
-                </span>
-              )}
-              <br></br>
-              <br></br>
-              {isEditingEmail ? (
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  onBlur={() => setIsEditingEmail(false)}
-                />
-              ) : (
-                <span onClick={() => setIsEditingEmail(true)}>
-                  <FaEnvelope /> {email}
-                </span>
-              )}
-            </p>
-            <button className="join-us-button">
-              <FaUserPlus /> Join Us
-            </button>
+            </footer>
           </div>
         </Draggable>
-        </div>
+      </div>
 
-      {/* Download Button */}
-      <button className="download-btn" onClick={handleDownload}>
+      <button onClick={handleDownload} style={{
+        marginLeft: '10px',
+        marginBottom: '3px',
+        padding: '10px 20px',
+        backgroundColor: '#9500ff',
+        border: 'none',
+        color: 'white',
+        borderRadius: '5px',
+        cursor: 'pointer',
+      }}>
         <FaDownload /> Download Template
       </button>
 
-      {/* Popup for Editing */}
       {isPopupOpen && (
-        <div className="popup">
-          <div className="popup-content">
-            <button className="close-btn" onClick={closePopup}>
-              <FaTimes />
-            </button>
-            {renderPopupContent()}
-          </div>
+        <div className="popup" style={{
+          background: '#cfc1c1',
+          padding: '20px',
+          borderRadius: '20px',
+          position: 'absolute',
+        }}>
+          <button onClick={closePopup} style={{
+            position: 'absolute',
+            top: '10px',
+            right: '40px',
+            cursor: 'pointer',
+          }}>
+            <FaTimes />
+          </button>
+          {renderPopupContent()}
         </div>
       )}
     </div>
-    
   );
 };
 
-export default App;
+export default Template4;

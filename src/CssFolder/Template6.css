@@ -84,7 +84,7 @@
   }
   
   .template {
-    background-image: url("/public/b4.jpg");/* White background for the template */
+    /* background-image: url("/src/Assets/T6b.jpg");White background for the template */
     padding: 20px;
     border-radius: 12px; /* More rounded corners */
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Deeper shadow for a card-like effect */

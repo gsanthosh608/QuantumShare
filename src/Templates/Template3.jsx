@@ -1,39 +1,42 @@
-import React, { useState, useRef } from 'react';
-import '../CssFolder/template4.css';
+import React, { useState } from 'react';
 import Draggable from 'react-draggable';
 import { FaPlusCircle, FaDownload, FaTimes, FaPhoneAlt, FaEnvelope, FaUserPlus } from 'react-icons/fa';
 import html2canvas from 'html2canvas';
+import bg3 from '../Assets/T4b.jpg'
 
-const Template4 = () => {
+const Template3 = () => {
   const [companyName, setCompanyName] = useState("Quantum Paradigm");
   const [tagline, setTagline] = useState("Delivering cutting-edge solutions for a smarter, more connected world.");
   const [footerText, setFooterText] = useState("");
-
   const [logo, setLogo] = useState("logos.png");
   const [teamPhoto, setTeamPhoto] = useState("p.jpg");
-
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [currentEditingElement, setCurrentEditingElement] = useState(null);
 
-  const [companyNameFontSize, setCompanyNameFontSize] = useState("71px");
-  const [companyNameFontStyle, setCompanyNameFontStyle] = useState("italic");
-  const [companyNameColor, setCompanyNameColor] = useState("#000000");
+  // Font and color states
+  const [companyNameStyles, setCompanyNameStyles] = useState({
+    fontSize: "71px",
+    fontStyle: "italic",
+    color: "#000000"
+  });
 
-  const [taglineFontSize, setTaglineFontSize] = useState("31px");
-  const [taglineFontStyle, setTaglineFontStyle] = useState("normal");
-  const [taglineColor, setTaglineColor] = useState("#B80000");
+  const [taglineStyles, setTaglineStyles] = useState({
+    fontSize: "31px",
+    fontStyle: "normal",
+    color: "#B80000"
+  });
 
-  const [footerFontSize, setFooterFontSize] = useState("25px");
-  const [footerFontStyle, setFooterFontStyle] = useState("normal");
-  const [footerColor, setFooterColor] = useState("#000000");
+  const [footerStyles, setFooterStyles] = useState({
+    fontSize: "25px",
+    fontStyle: "normal",
+    color: "#000000"
+  });
 
   const [phoneNumber, setPhoneNumber] = useState("+123456789");
   const [email, setEmail] = useState("contact@quantumparadigm.com");
-
   const [isEditingPhone, setIsEditingPhone] = useState(false);
   const [isEditingEmail, setIsEditingEmail] = useState(false);
-
-  const [logoDimensions, setLogoDimensions] = useState({ width: 235, height: 98});
+  const [logoDimensions, setLogoDimensions] = useState({ width: 235, height: 98 });
   const [teamPhotoDimensions, setTeamPhotoDimensions] = useState({ width: 294, height: 300 });
 
   const handleLogoChange = (e) => {
@@ -82,30 +85,30 @@ const Template4 = () => {
         return (
           <div>
             <h3>Edit Company Name Styles</h3>
-            <div className="control-group">
+            <div>
               <label>Font Size:</label>
               <input
                 type="number"
                 min="8"
                 max="72"
-                value={parseInt(companyNameFontSize)}
-                onChange={(e) => setCompanyNameFontSize(`${e.target.value}px`)}
+                value={parseInt(companyNameStyles.fontSize)}
+                onChange={(e) => setCompanyNameStyles(prev => ({ ...prev, fontSize: `${e.target.value}px` }))}
               />
             </div>
-            <div className="control-group">
+            <div>
               <label>Font Style:</label>
-              <select value={companyNameFontStyle} onChange={(e) => setCompanyNameFontStyle(e.target.value)}>
+              <select value={companyNameStyles.fontStyle} onChange={(e) => setCompanyNameStyles(prev => ({ ...prev, fontStyle: e.target.value }))}>
                 <option value="normal">Normal</option>
                 <option value="italic">Italic</option>
                 <option value="oblique">Oblique</option>
               </select>
             </div>
-            <div className="control-group">
+            <div>
               <label>Color:</label>
               <input
                 type="color"
-                value={companyNameColor}
-                onChange={(e) => setCompanyNameColor(e.target.value)}
+                value={companyNameStyles.color}
+                onChange={(e) => setCompanyNameStyles(prev => ({ ...prev, color: e.target.value }))}
               />
             </div>
           </div>
@@ -114,30 +117,30 @@ const Template4 = () => {
         return (
           <div>
             <h3>Edit Tagline Styles</h3>
-            <div className="control-group">
+            <div>
               <label>Font Size:</label>
               <input
                 type="number"
                 min="8"
                 max="72"
-                value={parseInt(taglineFontSize)}
-                onChange={(e) => setTaglineFontSize(`${e.target.value}px`)}
+                value={parseInt(taglineStyles.fontSize)}
+                onChange={(e) => setTaglineStyles(prev => ({ ...prev, fontSize: `${e.target.value}px` }))}
               />
             </div>
-            <div className="control-group">
+            <div>
               <label>Font Style:</label>
-              <select value={taglineFontStyle} onChange={(e) => setTaglineFontStyle(e.target.value)}>
+              <select value={taglineStyles.fontStyle} onChange={(e) => setTaglineStyles(prev => ({ ...prev, fontStyle: e.target.value }))}>
                 <option value="normal">Normal</option>
                 <option value="italic">Italic</option>
                 <option value="oblique">Oblique</option>
               </select>
             </div>
-            <div className="control-group">
+            <div>
               <label>Color:</label>
               <input
                 type="color"
-                value={taglineColor}
-                onChange={(e) => setTaglineColor(e.target.value)}
+                value={taglineStyles.color}
+                onChange={(e) => setTaglineStyles(prev => ({ ...prev, color: e.target.value }))}
               />
             </div>
           </div>
@@ -146,32 +149,31 @@ const Template4 = () => {
         return (
           <div>
             <h3>Edit Footer Styles</h3>
-            <div className="control-group">
+            <div>
               <label>Font Size:</label>
               <input
                 type="number"
                 min="8"
                 max="72"
-                value={parseInt(footerFontSize)}
-                onChange={(e) => setFooterFontSize(`${e.target.value}px`)}
+                value={parseInt(footerStyles.fontSize)}
+                onChange={(e) => setFooterStyles(prev => ({ ...prev, fontSize: `${e.target.value}px` }))}
               />
             </div>
-            <div className="control-group">
+            <div>
               <label>Font Style:</label>
-              <select value={footerFontStyle} onChange={(e) => setFooterFontStyle(e.target.value)}>
+              <select value={footerStyles.fontStyle} onChange={(e) => setFooterStyles(prev => ({ ...prev, fontStyle: e.target.value }))}>
                 <option value="normal">Normal</option>
                 <option value="italic">Italic</option>
                 <option value="oblique">Oblique</option>
               </select>
             </div>
-            <div className="control-group">
+            <div>
               <label>Color:</label>
               <input
                 type="color"
-                value={footerColor}
-                onChange={(e) => setFooterColor(e.target.value)}
+                value={footerStyles.color}
+                onChange={(e) => setFooterStyles(prev => ({ ...prev, color: e.target.value }))}
               />
-              
             </div>
           </div>
         );
@@ -179,7 +181,7 @@ const Template4 = () => {
         return (
           <div>
             <h3>Replace Logo</h3>
-            <div className="control-group">
+            <div>
               <label>Upload New Logo:</label>
               <input
                 type="file"
@@ -190,7 +192,7 @@ const Template4 = () => {
             {logo && (
               <div>
                 <h4>Resize Logo</h4>
-                <div className="resize-controls">
+                <div>
                   <label>Width:</label>
                   <input
                     type="number"
@@ -221,7 +223,7 @@ const Template4 = () => {
         return (
           <div>
             <h3>Replace Team Photo</h3>
-            <div className="control-group">
+            <div>
               <label>Upload New Team Photo:</label>
               <input
                 type="file"
@@ -232,7 +234,7 @@ const Template4 = () => {
             {teamPhoto && (
               <div>
                 <h4>Resize Team Photo</h4>
-                <div className="resize-controls">
+                <div>
                   <label>Width:</label>
                   <input
                     type="number"
@@ -265,24 +267,41 @@ const Template4 = () => {
   };
 
   return (
-    <div className="app-container">
-      {/* Draggable template section */}
-      <div className="template">
-        {/* Draggable Logo */}
+    <div style={{
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'flex-start',
+      height: '95vh',
+      padding: '10px',
+      backgroundColor: '#e6ecec',
+    }}>
+      <div style={{
+        backgroundImage: `url(${bg3})`,
+        width: '600px',
+        padding: '20px',
+        borderRadius: '12px',
+        boxShadow: '0 8px 16px rgba(0, 0, 0, 0.1)',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover'
+      }}>
         <Draggable>
-          <div className="draggable-element">
+          <div>
             {logo ? (
               <img
                 src={logo}
                 alt="Company Logo"
-                className="company-logo"
+                style={{
+                  cursor: 'pointer',
+                  width: `${logoDimensions.width}px`,
+                  height: `${logoDimensions.height}px`
+                }}
                 onClick={() => openPopup('logo')}
-                style={{ cursor: 'pointer', width: `${logoDimensions.width}px`, height: `${logoDimensions.height}px` }}
               />
             ) : (
-              <div className="add-logo">
+              <div>
                 <label htmlFor="logoUpload" style={{ cursor: 'pointer' }}>
-                  <FaPlusCircle className="plus-icon" />
+                  <FaPlusCircle />
                   <p>Add Logo</p>
                 </label>
                 <input
@@ -297,63 +316,59 @@ const Template4 = () => {
           </div>
         </Draggable>
 
-        {/* Draggable Company Name (Editable Text) */}
         <Draggable>
-          <div className="draggable-element">
+          <div>
             <h1
-              className="company-name"
               contentEditable="true"
               suppressContentEditableWarning={true}
-              onBlur={(e) => setCompanyName(e.target.innerText)}
-              onClick={() => openPopup('companyName')}
               style={{
                 cursor: 'pointer',
-                fontSize: companyNameFontSize,
-                fontStyle: companyNameFontStyle,
-                color: companyNameColor,
+                fontSize: companyNameStyles.fontSize,
+                fontStyle: companyNameStyles.fontStyle,
+                color: companyNameStyles.color
               }}
+              onClick={() => openPopup('companyName')}
             >
               {companyName}
             </h1>
           </div>
         </Draggable>
 
-        {/* Draggable Tagline (Editable Text) */}
         <Draggable>
-          <div className="draggable-element">
+          <div>
             <p
-              className="tagline"
               contentEditable="true"
               suppressContentEditableWarning={true}
-              onBlur={(e) => setTagline(e.target.innerText)}
-              onClick={() => openPopup('tagline')}
               style={{
                 cursor: 'pointer',
-                fontSize: taglineFontSize,
-                fontStyle: taglineFontStyle,
-                color: taglineColor,
+                fontSize: taglineStyles.fontSize,
+                fontStyle: taglineStyles.fontStyle,
+                color: taglineStyles.color
               }}
+              onClick={() => openPopup('tagline')}
             >
               {tagline}
             </p>
           </div>
         </Draggable>
 
-        {/* Draggable Team Photo */}
         <Draggable>
-          <div className="draggable-element">
+          <div>
             {teamPhoto ? (
               <img
                 src={teamPhoto}
                 alt="Team"
-                className="team-photo"
+                style={{
+                  cursor: 'pointer',
+                  width: `${teamPhotoDimensions.width}px`,
+                  height: `${teamPhotoDimensions.height}px`
+                }}
                 onClick={() => openPopup('teamPhoto')}
-                style={{ cursor: 'pointer', width: `${teamPhotoDimensions.width}px`, height: `${teamPhotoDimensions.height}px` }}
               />
             ) : (
-              <div className="add-team-photo">
+              <div>
                 <label htmlFor="teamPhotoUpload" style={{ cursor: 'pointer' }}>
-                  <FaPlusCircle className="plus-icon" />
+                  <FaPlusCircle />
                   <p>Add Team Photo</p>
                 </label>
                 <input
@@ -368,13 +383,12 @@ const Template4 = () => {
           </div>
         </Draggable>
 
-        {/* Draggable Footer (Editable Text) */}
-         {/* Draggable Footer (Editable Text) */}
-         <Draggable>
-          <div
-            className="draggable-footer"
-            style={{ fontSize: footerFontSize, fontStyle: footerFontStyle, color: footerColor }}
-          >
+        <Draggable>
+          <div style={{
+            fontSize: footerStyles.fontSize,
+            fontStyle: footerStyles.fontStyle,
+            color: footerStyles.color,
+          }}>
             <p>
               {footerText}
               {isEditingPhone ? (
@@ -389,8 +403,7 @@ const Template4 = () => {
                   <FaPhoneAlt /> {phoneNumber}
                 </span>
               )}
-              <br></br>
-              <br></br>
+              <br />
               {isEditingEmail ? (
                 <input
                   type="email"
@@ -404,32 +417,47 @@ const Template4 = () => {
                 </span>
               )}
             </p>
-            <button className="join-us-button">
+            <button style={{
+              background: '#007bff',
+              color: '#fff',
+              padding: '10px 20px',
+              borderRadius: '5px',
+              cursor: 'pointer'
+            }}>
               <FaUserPlus /> Join Us
             </button>
           </div>
         </Draggable>
-        </div>
+      </div>
 
-      {/* Download Button */}
-      <button className="download-btn" onClick={handleDownload}>
+      <button style={{
+        marginTop: '20px',
+        padding: '10px 20px',
+        backgroundColor: '#28a745',
+        color: '#fff',
+        borderRadius: '5px',
+        cursor: 'pointer'
+      }} onClick={handleDownload}>
         <FaDownload /> Download Template
       </button>
 
-      {/* Popup for Editing */}
       {isPopupOpen && (
-        <div className="popup">
-          <div className="popup-content">
-            <button className="close-btn" onClick={closePopup}>
-              <FaTimes />
-            </button>
-            {renderPopupContent()}
-          </div>
+        <div style={{
+          position: 'fixed',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          backgroundColor: 'white',
+          padding: '20px',
+          boxShadow: '0 5px 15px rgba(0,0,0,.5)',
+          zIndex: 1000,
+        }}>
+          <button onClick={closePopup}><FaTimes /></button>
+          {renderPopupContent()}
         </div>
       )}
     </div>
-    
   );
 };
 
-export default Template4;
+export default Template3;

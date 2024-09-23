@@ -1,8 +1,9 @@
 import React, { useState, useRef } from 'react';
-import './  Template6.css';
+import '../CssFolder/template6.css';
 import Draggable from 'react-draggable';
 import { FaPlusCircle, FaDownload, FaTimes, FaPhoneAlt, FaEnvelope, FaUserPlus } from 'react-icons/fa';
 import html2canvas from 'html2canvas';
+import bgimage from '../Assets/T6b.jpg'
 
 const Template6 = () => {
   const [companyName, setCompanyName] = useState("Quantum Paradigm");
@@ -267,7 +268,11 @@ const Template6 = () => {
   return (
     <div className="app-container">
       {/* Draggable template section */}
-      <div className="template">
+      <div className="template" style={{
+  backgroundImage: `url(${bgimage})`
+}}>
+
+
         {/* Draggable Logo */}
         <Draggable>
           <div className="draggable-element">
